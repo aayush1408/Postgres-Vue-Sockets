@@ -9,21 +9,22 @@
         <th>TIMESTAMP</th>     
       </tr>
       </thead>
-      <tbody v-for="row in response">
-      <tr>
+      <tbody v-for="row in response" :key="row.block_number">
+      <tr>            
         <td>{{row.block_number}}</td> 
         <td>{{row.block_hash}}</td>
         <td>{{row.miner}}</td>      
         <td>{{row.timestamp}}</td>
-      </tr>
+        <td><router-link v-bind:to="'/row/'+row.block_number">View</router-link></td>
+      </tr>        
       </tbody>
-    </table>
+    </table>   
   </div>
 </template>
 
 <script>
 import socketIOClient from "socket.io-client";
-
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -37,7 +38,8 @@ export default {
     socket.on('update',(data)=>{
       this.response = data;
     });
-  }
+  },
+
 }
 </script>
 

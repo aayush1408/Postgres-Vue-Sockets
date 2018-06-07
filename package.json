@@ -4,17 +4,25 @@
   "description": "A Vue.js project",
   "author": "aayush1408 <aayushjaiswal0114@gmail.com>",
   "private": true,
+  "proxy": {
+    "/rows": {
+      "target": "http://localhost:4000"
+    }
+  },
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "pg": "^7.4.3",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
-    "vue": "^2.5.2"
+    "vue": "^2.5.2",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
