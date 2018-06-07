@@ -3,14 +3,18 @@
     <table>
       <thead>
       <tr>
-        <th>Equip_id</th>
-        <th>Color</th>
+        <th>Block-NO</th>
+        <th>BLOCK-HASH</th>
+        <th>MINED BY</th>
+        <th>TIMESTAMP</th>     
       </tr>
       </thead>
       <tbody v-for="row in response">
       <tr>
-        <td>{{row.equip_id}}</td> 
-        <td>{{row.color}}</td>
+        <td>{{row.block_number}}</td> 
+        <td>{{row.block_hash}}</td>
+        <td>{{row.miner}}</td>      
+        <td>{{row.timestamp}}</td>
       </tr>
       </tbody>
     </table>

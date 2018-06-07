@@ -30,7 +30,7 @@ io.on('connection',(socket)=>{
     console.log('Connected');
   });
   setInterval(()=>{
-  client.query('SELECT * FROM test ORDER BY equip_id DESC LIMIT 10').then((result)=>{
+  client.query('SELECT * FROM blocks ORDER BY block_number DESC LIMIT 10').then((result)=>{
     socket.emit('update',result.rows);          
     console.log(result.rows);
   }).catch((err)=>{
