@@ -1,4 +1,4 @@
-# socket2
+# Vue with postgresql
 
 > A Vue.js project
 
