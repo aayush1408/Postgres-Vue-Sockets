@@ -5,17 +5,6 @@ const { Client } = require('pg')
 var conString = "postgres://test:test@localhost:5432/test";
 
 var client = new Client(conString);
-// client.connect();
-// client.connect().then(()=>{
-//   console.log('Connected');
-//   const sql = 'INSERT INTO test (color) VALUES ($1)';
-//   const params = ['orange'];
-//   return client.query(sql,params);
-// }).then((result)=>{
-//   console.log(result);
-// }).
-// catch(e => console.error('connection error', e.stack))
-
 
 app.use(express.static('index.html'));
 const server = app.listen('4000',()=>{
