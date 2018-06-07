@@ -1,11 +1,12 @@
 const express = require('express');
 const socket = require('socket.io');
 const app = express();
+const cors = require('cors');
 const { Client } = require('pg')
 var conString = "postgres://test:test@localhost:5432/test";
 
 var client = new Client(conString);
-
+app.use(cors({ origin: 'http://localhost:8080' }));
 app.use(express.static('index.html'));
 const server = app.listen('4000',()=>{
     console.log('Server running at 4000');
