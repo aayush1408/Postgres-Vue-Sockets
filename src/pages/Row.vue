@@ -38,7 +38,6 @@
     .catch(error => {
       console.log(error);
     });
-     console.log(this.$route.params.id)
   },
   }
 </script>
