@@ -36,7 +36,8 @@ export default {
   mounted(){
     const socket = socketIOClient('http://localhost:4000');
     socket.on('update',(data)=>{
-      this.response = data;
+      this.response = [...data];
+      console.log(this.response);
     });
   },
 
