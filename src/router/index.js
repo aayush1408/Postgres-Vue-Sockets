@@ -1,14 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import App from '@/App';
-import Row from '@/pages/Row';
+import Block from '@/pages/Block';
+import Transaction from '@/pages/Transaction';
 Vue.use(Router)
 export default new Router({
     routes: [
       {
-        path: '/row/:id',
-        name: 'Row',
-        component: Row
+        path: '/block/:id',
+        name: 'block',
+        component: Block
+      },
+      {
+        path: '/transaction/:id',
+        name: 'transaction',
+        component: Transaction
       },
       {
         path: '/',

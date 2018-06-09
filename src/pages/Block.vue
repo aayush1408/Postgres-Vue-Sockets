@@ -22,15 +22,14 @@
 <script>
   import axios from 'axios';
   export default {
-    name: 'home',
+    name: 'block',
     data () {
       return {
-        msg: 'Row',
         obj:{}
       }
     },
   created() {
-    axios.get(`http://localhost:4000/rows/${this.$route.params.id}`)
+    axios.get(`http://localhost:4000/block/${this.$route.params.id}`)
     .then(response => {
         this.obj = {...response.data};
          console.log(this.obj);
@@ -41,3 +40,12 @@
   },
   }
 </script>
+<style>
+
+table
+{
+    table-layout: fixed;
+    width: 100px;
+}
+</style>
+

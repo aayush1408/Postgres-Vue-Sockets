@@ -9,13 +9,32 @@
         <th>TIMESTAMP</th>     
       </tr>
       </thead>
-      <tbody v-for="row in response" :key="row.block_number">
+      <tbody v-for="block in blocks" :key="block.block_number">
       <tr>            
-        <td>{{row.block_number}}</td> 
-        <td>{{row.block_hash}}</td>
-        <td>{{row.miner}}</td>      
-        <td>{{row.timestamp}}</td>
-        <td><router-link v-bind:to="'/row/'+row.block_number">View</router-link></td>
+        <td>{{block.block_number}}</td> 
+        <td>{{block.block_hash}}</td>
+        <td>{{block.miner}}</td>      
+        <td>{{block.timestamp}}</td>
+        <td><router-link v-bind:to="'/block/'+block.block_number">View</router-link></td>
+      </tr>        
+      </tbody>
+    </table>   
+     <table>
+      <thead>
+      <tr>
+        <th>TRANSACTION</th>
+        <th>SENDER</th>
+        <th>TO</th>
+        <!-- <th>Amount</th>      -->
+      </tr>
+      </thead>
+      <tbody v-for="transaction in transactions" :key="transaction.block_number">
+      <tr>            
+        <td>{{transaction.transaction_hash}}</td> 
+        <td>{{transaction.sender}}</td>
+        <td>{{transaction.receiver  }}</td>      
+        <!-- <td>{{transaction.data}}</td> -->
+        <td><router-link v-bind:to="'/transaction/'+transaction.block_number">View</router-link></td>
       </tr>        
       </tbody>
     </table>   
@@ -30,20 +49,24 @@ export default {
   name: 'App',
   data(){
     return{
-      response:[]
+      blocks:[],
+      transactions:[]
     }
   },
   mounted(){
     const socket = socketIOClient('http://localhost:4000');
-    socket.on('update',(data)=>{
-      this.response = [...data];
-      console.log(this.response);
+    socket.on('blocks',(data)=>{
+      this.blocks = [...data];
+      console.log(this.blocks);
     });
+    socket.on('transactions',(data)=>{
+      this.transactions = [...data];
+      console.log(this.transactions);
+    })
   },
 
 }
 </script>
 
-<style>
 
-</style>
+
