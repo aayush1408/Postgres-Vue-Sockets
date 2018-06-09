@@ -29,8 +29,14 @@ sha3uncles:Sequelize.STRING,
 extra_data:Sequelize.STRING,
 gas_limit:Sequelize.NUMERIC,
 uncle_count:Sequelize.NUMERIC,
-transaction_count:Sequelize.NUMERIC
-});
+transaction_count:Sequelize.NUMERIC,
+},
+{
+  timestamps:false
+  });
+
+//Remove primary key
+Block.removeAttribute('id');
 
 //Handling cors
 app.use(cors({ origin: 'http://localhost:8080' }));
@@ -45,10 +51,11 @@ const io = socket(server);
 
 //handling the routes
 app.get('/rows/:id',(req,res)=>{
-  connection.query(`SELECT * FROM blocks WHERE block_number=${req.params.id}`)  
+  // connection.query(`SELECT * FROM blocks WHERE block_number=${req.params.id}`)  
+  Block.findOne({ where: {block_number:req.params.id}})
   .then((result)=>{
-    console.log(result);
-    res.send(result[0])
+    // console.log(result);
+    res.send(result.dataValues)
   });
 });
 
@@ -60,9 +67,14 @@ io.on('connection',(socket)=>{
   // });
 
   setInterval(()=>{
-    connection.query("SELECT * FROM blocks ORDER BY block_number DESC LIMIT 10")
+    // connection.query("SELECT * FROM blocks ORDER BY block_number DESC LIMIT 10")
+    Block.findAll({
+      order: [ [ 'block_number', 'DESC' ]],
+      limit: 10,
+    })
     .then(result => {
-      socket.emit('update',result[0]);
+      console.log(result);
+      socket.emit('update',result);
     }).catch((err)=>{
     console.log(err);
   });
