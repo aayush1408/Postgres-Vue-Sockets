@@ -71,11 +71,16 @@ const server = app.listen('4000',()=>{
 const io = socket(server);
 
 //handling the routes
-app.get('/rows/:id',(req,res)=>{
-  // connection.query(`SELECT * FROM blocks WHERE block_number=${req.params.id}`)  
+app.get('/block/:id',(req,res)=>{
   Block.findOne({ where: {block_number:req.params.id}})
   .then((result)=>{
-    // console.log(result);
+    res.send(result.dataValues)
+  });
+});
+
+app.get('/transaction/:id',(req,res)=>{
+  Transaction.findOne({ where: {block_number:req.params.id}})
+  .then((result)=>{
     res.send(result.dataValues)
   });
 });
