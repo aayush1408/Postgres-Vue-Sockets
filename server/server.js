@@ -38,6 +38,27 @@ transaction_count:Sequelize.NUMERIC,
 //Remove primary key
 Block.removeAttribute('id');
 
+//Defining the schema and model of transaction
+var Transaction = connection.define('transactions',{
+  transaction_hash:Sequelize.STRING,
+  block_number:Sequelize.NUMERIC,
+  nonce:Sequelize.NUMERIC,
+  sender:Sequelize.STRING,
+  receiver:Sequelize.STRING,
+  start_gas:Sequelize.NUMERIC,
+  value:Sequelize.NUMERIC,
+  data:Sequelize.STRING,
+  gas_price:Sequelize.NUMERIC,
+  timestamp:Sequelize.DATE,
+  transaction_index:Sequelize.NUMERIC,
+  },
+  {
+    timestamps:false
+  });
+  
+  //Remove primary key
+  Transaction.removeAttribute('id');
+  
 //Handling cors
 app.use(cors({ origin: 'http://localhost:8080' }));
 app.use(express.static('index.html'));
@@ -61,22 +82,27 @@ app.get('/rows/:id',(req,res)=>{
 
 //handling socket operations
 io.on('connection',(socket)=>{
-  
-  // client.connect().then(()=>{
-  //   console.log('Connected');
-  // });
-
   setInterval(()=>{
-    // connection.query("SELECT * FROM blocks ORDER BY block_number DESC LIMIT 10")
     Block.findAll({
       order: [ [ 'block_number', 'DESC' ]],
       limit: 10,
     })
     .then(result => {
       console.log(result);
-      socket.emit('update',result);
+      socket.emit('blocks',result);
     }).catch((err)=>{
     console.log(err);
   });
+  Transaction.findAll({
+    order: [ [ 'block_number', 'DESC' ]],
+    limit: 10,
+  })
+  .then(result => {
+    console.log(result);
+    socket.emit('transactions',result);
+  }).catch((err)=>{
+  console.log(err);
+});
+  
   },1000);  
 });
