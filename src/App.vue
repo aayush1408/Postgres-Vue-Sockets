@@ -1,43 +1,29 @@
 <template>
-  <div id="app">
-    <table>
-      <thead>
-      <tr>
-        <th>Block-NO</th>
-        <th>BLOCK-HASH</th>
-        <th>MINED BY</th>
-        <th>TIMESTAMP</th>     
-      </tr>
-      </thead>
-      <tbody v-for="block in blocks" :key="block.block_number">
-      <tr>            
-        <td>{{block.block_number}}</td> 
-        <td>{{block.block_hash}}</td>
-        <td>{{block.miner}}</td>      
-        <td>{{block.timestamp}}</td>
-        <td><router-link v-bind:to="'/block/'+block.block_number">View</router-link></td>
-      </tr>        
-      </tbody>
-    </table>   
-     <table>
-      <thead>
-      <tr>
-        <th>TRANSACTION</th>
-        <th>SENDER</th>
-        <th>TO</th>
-        <!-- <th>Amount</th>      -->
-      </tr>
-      </thead>
-      <tbody v-for="transaction in transactions" :key="transaction.block_number">
-      <tr>            
-        <td>{{transaction.transaction_hash}}</td> 
-        <td>{{transaction.sender}}</td>
-        <td>{{transaction.receiver  }}</td>      
-        <!-- <td>{{transaction.data}}</td> -->
-        <td><router-link v-bind:to="'/transaction/'+transaction.block_number">View</router-link></td>
-      </tr>        
-      </tbody>
-    </table>   
+  <div id="app" class="row">
+    <div class="col-lg-6">
+      <ul class="list-group" v-for="block in blocks" :key="block.block_number">       
+        <li class="list-group-item">
+        <router-link v-bind:to="'/block/'+block.block_number">
+        Block-no {{block.block_number}}
+        Block-hash {{block.block_hash}}
+        Mined by {{block.miner}}      
+        TimeStamp {{block.timestamp}}
+        </router-link>
+        </li>
+      </ul>   
+    </div>
+    <div class="col-lg-6">
+      <ul class="list-group" v-for="transaction in transactions" :key="transaction.block_number">
+      <li class="list-group-item">            
+        <router-link v-bind:to="'/transaction/'+transaction.block_number">
+        TransactionHash {{transaction.transaction_hash}}
+        Sender  {{transaction.sender}}
+        Reciever {{transaction.receiver}}
+        <!-- Data  {{transaction.data}} -->
+       </router-link>
+       </li> 
+      </ul>  
+    </div>      
   </div>
 </template>
 
