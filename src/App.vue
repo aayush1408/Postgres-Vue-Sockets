@@ -16,9 +16,9 @@
               <ul id="block-list">
               <li id="block-number"><span id="inside-box">Block {{block.block_number}}</span></li>
               <div id="other-block-details">
-              <li id="block-hash"><span class="block-headers">Block-hash:</span> {{block.block_hash.substring(0,16)}}...</li>
-              <li><span class="block-headers">Miner: </span> {{block.miner.substring(0,16)}}</li>      
-              <li><span class="block-headers">Time: </span> {{block.timestamp}}</li>
+              <li id="block-hash"><span class="block-headers">Block-hash:</span><span class="values"> {{block.block_hash.substring(0,16)}}...</span></li>
+              <li><span class="block-headers">Miner: </span><span class="values">{{block.miner.substring(0,16)}}...</span></li>      
+              <li><span class="block-headers">Time: </span><span class="values"> {{block.timestamp}}</span></li>
               </div>
               </ul>          
             </router-link>
@@ -31,9 +31,9 @@
           <div class="list-group-item" v-for="transaction in transactions" :key="transaction.block_number">            
             <router-link v-bind:to="'/transaction/'+transaction.block_number">
               <ul id="list-transactions">
-              <li id="transaction-hash"><span class="transaction-headers">Hash:  </span> {{transaction.transaction_hash.substring(0,16)}}...</li>
-              <li><span class="transaction-headers">From: </span> {{transaction.sender.substring(0,4)}}...<span class="transaction-headers">To: </span>{{transaction.receiver}}..</li>
-              <li><span class="transaction-headers">Amount: </span> {{ transaction.value }} ETH</li>
+              <li id="transaction-hash"><span class="transaction-headers">Hash:  </span> <span class="values">{{transaction.transaction_hash.substring(0,16)}}...</span></li>
+              <li><span class="transaction-headers">From: </span> <span class="values">{{transaction.sender.substring(0,4)}}...</span><span class="transaction-headers">To: </span>{{ transaction.receiver != null ? transaction.receiver.substring(0,16) : '..' }}</li>
+              <li><span class="transaction-headers">Amount: </span> <span class="values">{{ transaction.value }} ETH</span></li>
               </ul>
             </router-link>
           </div> 
@@ -87,7 +87,7 @@ export default {
   float:left;
   background-color:gray;
   color:white;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   font-family: 'Times New Roman', Times, serif;
   border-radius: 1.5px;
@@ -108,6 +108,7 @@ export default {
   list-style: none;
   display: block;
   height: 60px;
+  text-decoration: none;
 }
 .row{
   margin-top: 10px;
@@ -117,21 +118,33 @@ export default {
   display: inline-block;
   padding-top:12px;
 }
-li:hover{
-  list-style: none;
-}
+
 h5{
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: gray;
+  position: fixed;
 }
 li{
   font-size: 15px;
   padding: 2px;
 }
-.transaction-headers,.block-headers{
+.transaction-headers{
   font-style:bold;
   font-family:Arial, Helvetica, sans-serif;
   color:gray;
+  letter-spacing: 0.5px; 
+}
+.block-headers{
+  font-style:bold;
+  font-family:Arial, Helvetica, sans-serif;
+  color:gray;
+  letter-spacing: 0.6px;
+}
+.values{
+  letter-spacing: 0.7px;
+}
+router-link:hover{
+  text-decoration:none;
 }
 
 #transaction::-webkit-scrollbar {
