@@ -8,9 +8,9 @@
           <li>Sender {{obj.sender}}</li>          
           <li>Receiver {{obj.receiver}}</li>          
           <li>Gas-Start {{obj.gas_used}}</li>
-          <li>Value {{obj.parent_hash}}</li>          
-          <li>Data {{obj.miner}}</li>          
-          <li>Gas Price {{obj.sha3uncles}}</li>                  
+          <li>Value {{obj.value}}</li>          
+          <li>Data {{obj.data}}</li>          
+          <li>Gas Price {{obj.gas_price}}</li>                  
           <li>TimeStamp{{obj.timestamp}}</li>          
           <li>Transaction-Index {{obj.transaction_index}}</li>                                   
       </ul>
