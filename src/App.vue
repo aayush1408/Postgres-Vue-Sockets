@@ -14,9 +14,11 @@
             <router-link v-bind:to="'/block/'+block.block_number">
               <ul id="block-list">
               <li id="block-number"><span id="inside-box">Block {{block.block_number}}</span></li>
-              <li id="block-hash">Block-hash {{block.block_hash}}</li>
-              <li>Miner{{block.miner}}</li>      
+              <div id="other-block-details">
+              <li id="block-hash">Block-hash: {{block.block_hash.substring(0,16)}}...</li>
+              <li>Miner: {{block.miner.substring(0,16)}}</li>      
               <li>TimeStamp {{block.timestamp}}</li>
+              </div>
               </ul>          
             </router-link>
           </div>
@@ -27,9 +29,9 @@
           <div class="list-group-item" v-for="transaction in transactions" :key="transaction.block_number">            
             <router-link v-bind:to="'/transaction/'+transaction.block_number">
               <ul id="list-transactions">
-              <li id="transaction-hash"><span class="transaction-details" id="transaction-hash">TransactionHash</span> {{transaction.transaction_hash}}</li>
-              <li><span class="transaction-details">Sender {{transaction.sender}}</span></li>
-              <li><span class="transaction-details">Reciever {{transaction.receiver}}</span></li>
+              <li id="transaction-hash">TransactionHash: {{transaction.transaction_hash.substring(0,16)}}...</li>
+              <li>Sender: {{transaction.sender.substring(0,16)}}...</li>
+              <li>Reciever: {{transaction.receiver}}..</li>
               </ul>
             </router-link>
           </div> 
@@ -67,21 +69,28 @@ export default {
 }
 </script>
 <style>
+
 #block,#transaction{
  display:block; 
  width:200px;
  height:500px;
  overflow-y:scroll;
- overflow-x:hidden;
+ /* overflow-x:hidden; */
  border-spacing: 200px;
 }
+
 #block-number{
   display:block;
-  height:50px;
+  height:60px;
   width:120px;
   float:left;
   background-color:darkgray;
   color:white;
+  font-size: 18px;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: 1.5px;
+  /* margin-right:20px;  */
 }
 #list-transactions{
   list-style: none;
@@ -92,26 +101,17 @@ export default {
   color:grey;
   font-family: 'Times New Roman', Times, serif;
   list-style: none;
-  
-}
-#block-hash{
-  overflow: hidden;
-}
-#transaction-hash{
-  overflow: hidden;
 }
 .row{
   margin-top: 10px;
 }
-.list-group{
-  margin-left: -30px;
+
+#inside-box{
+  display: inline-block;
+  padding-top:12px;
 }
-.list-group-item{
-  display: inline;
-}
-#transaction-hash{
-  /* display: block; */
-  float: left;
+li:hover{
+  list-style: none;
 }
 
 
