@@ -18,10 +18,12 @@
     "axios": "^0.18.0",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "moment": "^2.22.2",
     "pg": "^7.4.3",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
     "vue": "^2.5.2",
+    "vue-moment": "^4.0.0-0",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1"
   },
