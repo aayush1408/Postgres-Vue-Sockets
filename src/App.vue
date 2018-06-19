@@ -14,12 +14,12 @@
           <div class="list-group-item" v-for="block in blocks" :key="block.block_number">
             <ul id="block-list">
               <router-link v-bind:to="'/block/'+block.block_number">              
-                <li id="block-number"><span id="inside-box">Block {{block.block_number}}</span><span id="block-sec">{{Math.floor((new Date().getTime())/1000 - (new Date(block.timestamp).getTime())/1000) < 60 ? 'secs ago' : `${Math.floor((Math.floor((new Date().getTime())/1000 - (new Date(block.timestamp).getTime())/1000))/60)} mins ago` }}</span></li>
+                <li id="block-number"><span id="inside-box">Block {{block.block_number}}</span><span id="block-sec">{{Math.floor((new Date().getTime())/1000 - (new Date(block.timestamp).getTime())/1000) > 60 ? `${Math.floor((Math.floor((new Date().getTime())/1000 - (new Date(block.timestamp).getTime())/1000))/60)} mins ago` : `Math.floor((new Date().getTime())/1000 - (new Date(block.timestamp).getTime())/1000) secs ago` }}</span></li>
               </router-link>
               <div id="other-block-details">
                 <li id="block-hash"><span class="block-headers">Txns: </span><span class="values"> {{block.transaction_count}}</span></li>
                 <li><span class="block-headers">Miner: </span><span class="values">{{block.miner.substring(0,16)}}...</span></li>      
-                <li><span class="block-headers">Time: </span><span class="values">{{new Date(block.timestamp).getDate()}}-{{new Date(block.timestamp).getMonth()}}-{{new Date(block.timestamp).getFullYear()}}   {{new Date(block.timestamp).getHours()}}:{{new Date(block.timestamp).getMinutes()}}:{{new Date(block.timestamp).getSeconds()}}</span></li>
+                <li><span class="block-headers">Created at: </span><span class="values">{{new Date(block.timestamp).getDate()}}-{{new Date(block.timestamp).getMonth()}}-{{new Date(block.timestamp).getFullYear()}}   {{new Date(block.timestamp).getHours()}}:{{new Date(block.timestamp).getMinutes()}}:{{new Date(block.timestamp).getSeconds()}}</span></li>
               </div>
               </ul>          
           </div>   
@@ -31,7 +31,7 @@
           <h5 class="list-group-item sticky-top"><i class="fa fa-list-alt "></i> Transactions</h5>               
           <div class="list-group-item" v-for="transaction in transactions" :key="transaction.block_number">            
               <ul id="list-transactions">
-                <li id="transaction-timestamp">>{{Math.floor((new Date().getTime())/1000 - (new Date(transaction.timestamp).getTime())/1000) < 60 ? 'secs ago' : `${Math.floor((Math.floor((new Date().getTime())/1000 - (new Date(transaction.timestamp).getTime())/1000))/60)} mins ago` }}</li>                
+                <li id="transaction-timestamp">> {{Math.floor((new Date().getTime())/1000 - (new Date(transaction.timestamp).getTime())/1000) > 60 ? `${Math.floor((Math.floor((new Date().getTime())/1000 - (new Date(transaction.timestamp).getTime())/1000))/60)} mins ago` : `{Math.floor((new Date().getTime())/1000 - (new Date(transaction.timestamp).getTime())/1000)}secs ago`}}</li>                
                 <li id="transaction-hash">
                   <span class="transaction-headers">Tx#:  </span>
                   <router-link v-bind:to="'/transaction/'+transaction.block_number" style="#d6ebf2">                
@@ -122,6 +122,7 @@ export default {
 #inside-box{
   display: inline-block;
   padding-top:8px;
+  font-size: 15px;
 }
 
 h5{
@@ -149,9 +150,12 @@ li{
 }
 #transaction-timestamp{
   float:right;
+  font-family:Arial, Helvetica, sans-serif;  
+  font-size: 13px;
 }
 #block-sec{
   font-size: 13px;
+  letter-spacing: 0.4px;
   font-family: 'Times New Roman', Times, serif;  
 }
 #transaction::-webkit-scrollbar {
