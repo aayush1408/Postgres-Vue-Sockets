@@ -1,20 +1,16 @@
 <template>
-  <div id="app" class="">
-    <!-- navabar -->
-    <nav class="navbar navbar-light bg-light">
-      <span class="navbar-brand mb-0 h1">Matic Network</span>
-    </nav>
+  <div id="app">
     <!-- body part of the page -->
    <div  class="container">    
     <div class="row">
       <!-- contains the block and transactions -->
-      <div class="col-lg-6 col-md-12 col-sm-12" id="block">
+      <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="block">
         <div class="list-group">  
           <h5 class="list-group-item sticky-top"><i class="fa fa-cubes"></i> Blocks</h5>               
           <div class="list-group-item" v-for="block in blocks" :key="block.block_number">
             <ul id="block-list">
               <router-link v-bind:to="'/block/'+block.block_number">              
-                <li id="block-number"><span id="inside-box">Block {{block.block_number}}</span><span id="block-sec">{{ block.timestamp | moment("from", "now") }}</span></li>
+                <li id="block-number"><span id="inside-box">Block {{block.block_number}}</span><br><span id="block-sec">> {{ block.timestamp | moment("from", "now") }}</span></li>
               </router-link>
               <div id="other-block-details">
                 <li id="block-hash"><span class="block-headers">Txns: </span><span class="values"> {{block.transaction_count}}</span></li>
@@ -26,7 +22,7 @@
         </div>
       </div>
     
-      <div class="col-lg-6 col-md-12 col-sm-12" id="transaction">
+      <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" id="transaction">
         <div class="list-group">
           <h5 class="list-group-item sticky-top"><i class="fa fa-list-alt "></i> Transactions</h5>               
           <div class="list-group-item" v-for="transaction in transactions" :key="transaction.block_number">            
@@ -77,7 +73,6 @@ export default {
 }
 </script>
 <style>
-
 #block,#transaction{
  display:block; 
  width:10px;
@@ -85,7 +80,6 @@ export default {
  overflow-y:scroll;
  border-spacing: 200px;
 }
-
 #block-number{
   display:block;
   height:70px;
@@ -119,13 +113,11 @@ export default {
 .row{
   margin-top: 15px;
 }
-
 #inside-box{
   display: inline-block;
   padding-top:8px;
   font-size: 15px;
 }
-
 h5{
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: gray;
@@ -173,6 +165,7 @@ li{
 #transaction::-webkit-scrollbar-thumb {
     background-color:darkgray;
 }
+
 </style>
 
 
