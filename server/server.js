@@ -74,17 +74,23 @@ const io = socket(server);
 app.get('/block/:id',(req,res)=>{
   Block.findOne({ where: {block_number:req.params.id}})
   .then((result)=>{
-    res.send(result.dataValues)
+    res.send(result.dataValues);
   });
 });
 
 app.get('/transaction/:id',(req,res)=>{
   Transaction.findOne({ where: {block_number:req.params.id}})
   .then((result)=>{
-    res.send(result.dataValues)
+    res.send(result.dataValues);
   });
 });
 
+app.get('/block/transactions/:id',(req,res)=>{
+  Transaction.findAll({ where: {block_number:req.params.id}})
+  .then((result)=>{
+    res.send(result);
+  });
+})
 //handling socket operations
 io.on('connection',(socket)=>{
   setInterval(()=>{
