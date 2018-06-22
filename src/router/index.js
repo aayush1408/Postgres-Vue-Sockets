@@ -1,8 +1,10 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 import App from '@/App';
+import BlockTransactions from '../pages/BlockTransactions';
 import Block from '@/pages/Block';
 import Transaction from '@/pages/Transaction';
+
 Vue.use(Router)
 export default new Router({
     routes: [
@@ -20,6 +22,11 @@ export default new Router({
         path: '/',
         name: 'App',
         component: App
+      },
+      {
+        path: '/block/transactions/:id',
+        name: 'BlockTransactions',
+        component: BlockTransactions
       }
     ]
   });
