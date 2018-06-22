@@ -1,9 +1,7 @@
 <template>
   <div id="blocks-page" class="container">
-      <table class="table">
-        <thead>
-          <tr><th>Block Information</th></tr>
-        </thead>
+    <h4>Block Information</h4>
+      <table class="table table-responsive">
         <tbody>
         <tr>
           <td width="390">&nbsp;&nbsp;Block Number:
@@ -68,11 +66,13 @@
             {{obj.timestamp}}
           </td>
         </tr>
-           <tr>
-          <td width="390">&nbsp;&nbsp;Transaction Count
+        <tr>
+          <td width="390">&nbsp;&nbsp;Transactions
           </td>
           <td>
-            {{obj.transaction_count}}
+        <router-link v-bind:to="'/block/transactions/'+obj.block_number">            
+            {{obj.transaction_count}} transactions
+          </router-link>                    
           </td>
         </tr>
           <tr>
@@ -111,11 +111,14 @@
 <style>
 table{
   font-size: 15px;
+  margin-top: 6px;
 }
-th{
+h4{
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 22px;
+  font-size: 26px;
   color:gray;
+  margin-top: 8px;  
+  font-weight: bold;
 }
 td{
   font-family: 'Times New Roman', Times, serif;

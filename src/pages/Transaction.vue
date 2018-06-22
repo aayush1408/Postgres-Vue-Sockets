@@ -1,7 +1,7 @@
 <template>
   <div id="transactions-page" class="container">
-      <table class="table">
-          <tr><th>Transaction Information</th></tr>
+    <h4>Transaction Information</h4>    
+      <table class="table table-responsive">
         <tr>
           <td width="390">&nbsp;&nbsp;Block Number:
           </td>
@@ -108,12 +108,15 @@
 
 <style>
 table{
-  overflow-x: auto;
+   font-size: 15px;
+   margin-top: 6px;
 }
-th{
+h4{
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 22px;
+  font-size: 26px;
   color:gray;
+  margin-top: 8px;  
+  font-weight: bold;
 }
 td{
   font-family: 'Times New Roman', Times, serif;
