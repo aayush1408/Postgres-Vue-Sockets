@@ -1,10 +1,10 @@
 <template>
   <div id="transactions-page" class="container">
     <h4>
-      <!-- Transaction for block: {{transactions[0].block_number}}       -->
+      Transaction for block: {{transactions.length > 0 ? `${transactions[0].block_number}` : `0`}}      
     </h4>
     <p>A total of {{transactions.length}} transactions found</p>
-      <table class="table table-responsive">
+      <table class="table table-responsive" v-if="transactions.length > 0">
        <thead>
         <tr>
           <th scope="col" width="300px">TxHash</th>
@@ -18,7 +18,7 @@
       </thead>
       <tbody>
           <tr v-for="transaction in transactions" :key="transaction.transaction_hash">
-            <td>{{transaction.transaction_hash.substring(0,16)}}..</td>
+            <td>{{transaction.transaction_hash.substring(0,16) == null? 'Null' : `${transaction.transaction_hash.substring(0,16)}` }}..</td>
             <td>{{transaction.block_number}}</td>
             <td>{{transaction.timestamp | moment("from", "now") }}</td>
             <td>{{transaction.sender.substring(0,16)}}..</td>
